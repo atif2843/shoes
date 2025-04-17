@@ -1,21 +1,24 @@
 const fs = require('fs');
 const path = require('path');
 
-const sourceDir = path.join(__dirname, '../node_modules/leaflet/dist/images');
-const targetDir = path.join(__dirname, '../public/images');
-
-// Create target directory if it doesn't exist
-if (!fs.existsSync(targetDir)) {
-  fs.mkdirSync(targetDir, { recursive: true });
+// Create the public/images directory if it doesn't exist
+const publicImagesDir = path.join(process.cwd(), 'public', 'images');
+if (!fs.existsSync(publicImagesDir)) {
+  fs.mkdirSync(publicImagesDir, { recursive: true });
 }
 
-// Copy marker files
-const markerFiles = ['marker-icon.png', 'marker-icon-2x.png', 'marker-shadow.png'];
+// Copy marker icons from leaflet dist to public/images
+const leafletPath = path.join(process.cwd(), 'node_modules', 'leaflet', 'dist', 'images');
+const files = ['marker-icon.png', 'marker-icon-2x.png', 'marker-shadow.png'];
 
-markerFiles.forEach(file => {
-  fs.copyFileSync(
-    path.join(sourceDir, file),
-    path.join(targetDir, file)
-  );
-  console.log(`Copied ${file} to public/images/`);
+files.forEach(file => {
+  const src = path.join(leafletPath, file);
+  const dest = path.join(publicImagesDir, file);
+  
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dest);
+    console.log(`Copied ${file} to public/images/`);
+  } else {
+    console.warn(`Warning: ${file} not found in leaflet dist folder`);
+  }
 }); 

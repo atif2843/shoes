@@ -17,44 +17,7 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+    Content-Security-Policy = "frame-ancestors 'none'"
 
 [build.processing]
-  skip_processing = false
-
-[build.processing.css]
-  bundle = true
-  minify = true
-
-[build.processing.js]
-  bundle = true
-  minify = true
-
-[build.processing.images]
-  compress = true
-
-[build.processing.html]
-  pretty_urls = true
-
-[build.processing.skip_processing]
-  - "*.js"
-  - "*.css"
-  - "*.html"
-  - "*.json"
-  - "*.md"
-  - "*.txt"
-  - "*.xml"
-  - "*.yml"
-  - "*.yaml"
-  - "*.toml"
-  - "*.svg"
-  - "*.png"
-  - "*.jpg"
-  - "*.jpeg"
-  - "*.gif"
-  - "*.ico"
-  - "*.webp"
-  - "*.woff"
-  - "*.woff2"
-  - "*.ttf"
-  - "*.eot"
-  - "*.otf" 
+  skip_processing = true
