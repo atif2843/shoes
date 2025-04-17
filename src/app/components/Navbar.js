@@ -111,6 +111,7 @@ export default function Navbar() {
     Brands: "/brands",
     About: "/about",
     Contact: "/contact",
+    Test: "/test",
   };
 
   return (
