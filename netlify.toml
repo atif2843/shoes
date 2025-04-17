@@ -5,6 +5,48 @@
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
   NODE_VERSION = "18"
+  NEXT_TELEMETRY_DISABLED = "1"
 
 [[plugins]]
-  package = "@netlify/plugin-nextjs" 
+  package = "@netlify/plugin-nextjs"
+
+[build.processing]
+  skip_processing = true
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.images]
+  compress = true
+
+[build.processing.html]
+  pretty_urls = true
+
+[build.processing.skip_processing]
+  - "*.js"
+  - "*.css"
+  - "*.html"
+  - "*.json"
+  - "*.md"
+  - "*.txt"
+  - "*.xml"
+  - "*.yml"
+  - "*.yaml"
+  - "*.toml"
+  - "*.svg"
+  - "*.png"
+  - "*.jpg"
+  - "*.jpeg"
+  - "*.gif"
+  - "*.ico"
+  - "*.webp"
+  - "*.woff"
+  - "*.woff2"
+  - "*.ttf"
+  - "*.eot"
+  - "*.otf" 
