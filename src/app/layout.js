@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/app/context/CartContext";
+import '@/app/config/fontawesome';
 
 const inter = Inter({ subsets: ["latin"] });
 

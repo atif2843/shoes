@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "../context/CartContext";
@@ -21,7 +22,7 @@ export default function CartPage() {
         {cart.length === 0 ? (
           <div className="text-center py-12">
             <h2 className="text-2xl font-semibold mb-4">Your cart is empty</h2>
-            <p className="text-gray-600 mb-6">Looks like you haven't added any items to your cart yet.</p>
+            <p className="text-gray-600 mb-6">Looks like you haven&apos;t added any items to your cart yet.</p>
             <Link href="/" className="btn btn-primary">
               Continue Shopping
             </Link>
@@ -34,11 +35,13 @@ export default function CartPage() {
                 <div className="space-y-6">
                   {cart.map((item) => (
                     <div key={item.id} className="flex items-center gap-4 p-4 bg-base-100 rounded-lg">
-                      <div className="w-24 h-24 flex-shrink-0">
-                        <img
+                      <div className="relative w-24 h-24 flex-shrink-0">
+                        <Image
                           src={item.image}
                           alt={item.name}
-                          className="w-full h-full object-cover rounded-lg"
+                          fill
+                          className="object-cover rounded-lg"
+                          sizes="(max-width: 96px) 100vw, 96px"
                         />
                       </div>
                       <div className="flex-grow">

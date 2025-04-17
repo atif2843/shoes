@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import Card from "./Card";
 
 export default function BrandProductList({
@@ -53,19 +54,27 @@ export default function BrandProductList({
       {/* Brand Image */}
       {brandDetails ? (
         <div className="relative">
-          <div className="min-h-5 h-50 overflow-hidden flex items-center justify-center w-full">
-            <img
+          <div className="min-h-5 h-50 overflow-hidden flex items-center justify-center w-full relative">
+            <Image
               src={brandDetails.bg_image}
               alt={`${brandslug} background`}
-              className="object-cover"
+              width={1200}
+              height={300}
+              className="object-cover w-full"
+              priority
             />
           </div>
           <div className="absolute -bottom-15 left-10">
-            <img
-              src={brandDetails.images}
-              alt={`${brandslug} logo`}
-              className="h-32 w-32 rounded-full aspect-auto"
-            />
+            <div className="relative h-32 w-32">
+              <Image
+                src={brandDetails.images}
+                alt={`${brandslug} logo`}
+                fill
+                className="rounded-full object-cover"
+                sizes="128px"
+                priority
+              />
+            </div>
           </div>
         </div>
       ) : (

@@ -1,21 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-import markerShadowPng from "leaflet/dist/images/marker-shadow.png";
-import supabase from "../api/auth/supabaseClient";
-import { useRouter } from "next/navigation"; // Next.js 13+
+import { useRouter } from "next/navigation";
+import { supabase } from "../api/auth/supabaseClient";
 
-const DynamicMap = dynamic(
-  () => import("react-leaflet").then((mod) => mod.MapContainer),
+// Dynamically import all Leaflet components
+const Map = dynamic(
+  () => import("./Map"), // We'll create this component
   { ssr: false }
 );
 
 export default function Contact() {
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -24,6 +20,11 @@ export default function Contact() {
     message: "",
   });
   const [formErrors, setFormErrors] = useState(null);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -61,19 +62,6 @@ export default function Contact() {
       setFormErrors(null);
     }
   };
-
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const customMarker = new L.Icon({
-    iconUrl: markerIconPng,
-    shadowUrl: markerShadowPng,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-  });
 
   return (
     <div className="container mx-auto px-8 py-28 ">
@@ -126,10 +114,7 @@ export default function Contact() {
             className="w-full p-2 border border-gray-300 rounded"
             required
           />
-          <label
-            htmlFor="message"
-            className="block font-medium text-black mb-1"
-          >
+          <label htmlFor="message" className="block font-medium text-black mb-1">
             Message (Optional)
           </label>
           <textarea
@@ -161,22 +146,10 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Google Maps */}
+      {/* Map */}
       {isClient && (
         <div className="mt-8 h-96">
-          <DynamicMap
-            center={[19.120324086655422, 72.89253432774979]}
-            zoom={12}
-            className="h-full w-full"
-          >
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker
-              position={[19.120324086655422, 72.89253432774979]}
-              icon={customMarker}
-            >
-              <Popup>Our Mumbai Office</Popup>
-            </Marker>
-          </DynamicMap>
+          <Map />
         </div>
       )}
     </div>
