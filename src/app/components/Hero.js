@@ -58,7 +58,7 @@ export default function Carousel({ images }) {
 
         {/* Custom Pagination */}
         <div className="w-auto bg-red-500 relative">
-        <div className="absolute bottom-0 left-0 flex justify-end md:justify-end pb-2 z-50 w-full md:w-1/4">
+        <div className="absolute bottom-0 left-0 flex justify-end md:justify-end pb-2 z-30 w-full md:w-1/4">
           <div className="custom-pagination"></div>
         </div>
         </div>
